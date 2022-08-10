@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface Dao {
     @Query ("SELECT * FROM note_list")
-    fun getAllNotes(): Flow<List<NoteItem>>//получаем все заметки без фильтрации
+    fun getAllNotes(): Flow<List<NoteItem>> //получаем все заметки без фильтрации
     //Flow - специальный класс, который будет подключать нашу бд к нашему списку и втоматически всё обновлять
     @Insert
     suspend fun insertNote(note: NoteItem) //функция запускается внутри корутины, поэтому suspend
