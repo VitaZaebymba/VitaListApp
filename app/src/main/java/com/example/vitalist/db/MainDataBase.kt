@@ -11,13 +11,16 @@ import com.example.vitalist.entities.NoteItem
 
 @Database (entities = [Library::class, ListItem::class, ListNames::class, NoteItem::class], version = 1)
 abstract class MainDataBase : RoomDatabase () {
+
+    abstract  fun getDao(): Dao
+
     companion object {
         @Volatile
         private  var INSTANCE: MainDataBase? = null
         fun getDataBase(context: Context): MainDataBase {
             return  INSTANCE ?: synchronized(this) { //на случай, если несколько потоков одновременно используют создание бд
-                val instance = Room.databaseBuilder(context.applicationContext,
-                    MainDataBase::class.java, "vita_list.db").build() //переменная, в которой будем создавать бд
+                val instance = Room.databaseBuilder(context.applicationContext, //переменная, в которой будем создавать бд
+                    MainDataBase::class.java, "vita_list.db").build()
                 instance
             }
         }
